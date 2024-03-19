@@ -3,16 +3,24 @@ import Link from 'next/link'
 import '@/app/globalStyles/header.css'
 import Logo from '@/components/elements/Logo/Logo'
 import { useLang } from '@/hooks/useLang'
+import Menu from './Menu'
+import { openMenu } from '@/context/madals'
+import { addOverflowHiddenFromBody } from '@/lib/utils/common'
 
 const Header = () => {
   const { lang, translations } = useLang()
 
+  const handleOpenMenu = () => {
+    addOverflowHiddenFromBody()
+    openMenu()
+  }
   return (
     <header className='header'>
       <div className='container header__container'>
-        <button className='btn-reset header__burger'>
+        <button onClick={handleOpenMenu} className='btn-reset header__burger'>
           {translations[lang].header.menu_btn}
         </button>
+        <Menu />
         <div className='header__logo'>
           <Logo />
         </div>
